@@ -26,22 +26,13 @@ const generateItems = (startIndex: number, endIndex: number) => {
 
 app.get('/api/items', (req, res) => {
 
-    console.log('req.query: %o', req.query)
-
     let page = req.query.page ? req.query.page : 1
-
     const prev = req.query.prev ? req.query.prev : false
-
-    console.log('page: %o', page)
-    console.log('prev: %o', prev)
 
     faker.seed(Number(page))
     // const page = 1
     const startIndex = (Number(page) - 1) * PAGE_SIZE;
     const endIndex = Math.min(startIndex + PAGE_SIZE - 1, TOTAL_ITEMS - 1);
-
-    console.log('startIndex: %o', prev ? 0 : startIndex)
-    console.log('endIndex: %o', endIndex)
 
     const items = generateItems(prev ? 0 : startIndex, endIndex)
 
